@@ -1,0 +1,218 @@
+{
+  "name": "classifoid",
+  "version": "0.0.1",
+  "dependencies": {
+    "bcrypt": {
+      "version": "0.7.3",
+      "dependencies": {
+        "bindings": {
+          "version": "1.0.0"
+        }
+      }
+    },
+    "crypto": {
+      "version": "0.0.3"
+    },
+    "express": {
+      "version": "3.0.4",
+      "dependencies": {
+        "connect": {
+          "version": "2.7.1",
+          "dependencies": {
+            "qs": {
+              "version": "0.5.1"
+            },
+            "formidable": {
+              "version": "1.0.11"
+            },
+            "crc": {
+              "version": "0.2.0"
+            },
+            "bytes": {
+              "version": "0.1.0"
+            },
+            "pause": {
+              "version": "0.0.1"
+            }
+          }
+        },
+        "commander": {
+          "version": "0.6.1"
+        },
+        "range-parser": {
+          "version": "0.0.4"
+        },
+        "mkdirp": {
+          "version": "0.3.3"
+        },
+        "cookie": {
+          "version": "0.0.5"
+        },
+        "buffer-crc32": {
+          "version": "0.1.1"
+        },
+        "fresh": {
+          "version": "0.1.0"
+        },
+        "methods": {
+          "version": "0.0.1"
+        },
+        "send": {
+          "version": "0.1.0",
+          "dependencies": {
+            "mime": {
+              "version": "1.2.6"
+            }
+          }
+        },
+        "cookie-signature": {
+          "version": "0.0.1"
+        },
+        "debug": {
+          "version": "0.7.2"
+        }
+      }
+    },
+    "jade": {
+      "version": "0.28.1",
+      "dependencies": {
+        "commander": {
+          "version": "0.6.1"
+        },
+        "mkdirp": {
+          "version": "0.3.4"
+        },
+        "coffee-script": {
+          "version": "1.4.0"
+        }
+      }
+    },
+    "knox": {
+      "version": "0.5.2",
+      "dependencies": {
+        "mime": {
+          "version": "1.2.9"
+        },
+        "xml2js": {
+          "version": "0.2.3",
+          "dependencies": {
+            "sax": {
+              "version": "0.5.1"
+            }
+          }
+        },
+        "debug": {
+          "version": "0.7.2"
+        }
+      }
+    },
+    "mysql": {
+      "version": "2.0.0-alpha7",
+      "dependencies": {
+        "require-all": {
+          "version": "0.0.3"
+        },
+        "bignumber.js": {
+          "version": "1.0.1"
+        }
+      }
+    },
+    "nib": {
+      "version": "0.9.1"
+    },
+    "nodemailer": {
+      "version": "0.3.41",
+      "dependencies": {
+        "mailcomposer": {
+          "version": "0.1.29",
+          "dependencies": {
+            "mimelib": {
+              "version": "0.2.10",
+              "dependencies": {
+                "encoding": {
+                  "version": "0.1.5",
+                  "dependencies": {
+                    "iconv-lite": {
+                      "version": "0.2.7"
+                    }
+                  }
+                },
+                "addressparser": {
+                  "version": "0.1.3"
+                }
+              }
+            },
+            "mime": {
+              "version": "1.2.9"
+            }
+          }
+        },
+        "simplesmtp": {
+          "version": "0.2.3",
+          "dependencies": {
+            "rai": {
+              "version": "0.1.7"
+            },
+            "xoauth2": {
+              "version": "0.1.5",
+              "dependencies": {
+                "request": {
+                  "version": "2.12.0",
+                  "dependencies": {
+                    "form-data": {
+                      "version": "0.0.6",
+                      "dependencies": {
+                        "combined-stream": {
+                          "version": "0.0.3",
+                          "dependencies": {
+                            "delayed-stream": {
+                              "version": "0.0.5"
+                            }
+                          }
+                        },
+                        "async": {
+                          "version": "0.1.22"
+                        }
+                      }
+                    },
+                    "mime": {
+                      "version": "1.2.9"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optimist": {
+          "version": "0.3.5",
+          "dependencies": {
+            "wordwrap": {
+              "version": "0.0.2"
+            }
+          }
+        }
+      }
+    },
+    "path": {
+      "version": "0.4.9"
+    },
+    "stylus": {
+      "version": "0.32.0",
+      "dependencies": {
+        "cssom": {
+          "version": "0.2.5"
+        },
+        "mkdirp": {
+          "version": "0.3.4"
+        },
+        "debug": {
+          "version": "0.7.2"
+        }
+      }
+    },
+    "validator": {
+      "version": "0.4.24"
+    }
+  }
+}

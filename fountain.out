@@ -1,0 +1,387 @@
+-- MySQL dump 10.13  Distrib 5.5.28, for osx10.6 (i386)
+--
+-- Host: localhost    Database: ***REMOVED***
+-- ------------------------------------------------------
+-- Server version	5.5.28
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `company`
+--
+
+DROP TABLE IF EXISTS `company`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(64) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company`
+--
+
+LOCK TABLES `company` WRITE;
+/*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` VALUES (1,'Default Fountain'),(3,'EMC'),(4,'IBM'),(2,'Panasonic Avionics'),(5,'Tivo');
+/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `company_email`
+--
+
+DROP TABLE IF EXISTS `company_email`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company_email` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email_suffix` varchar(32) NOT NULL DEFAULT '',
+  `company_id` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_suffix` (`email_suffix`,`company_id`),
+  KEY `fk_email_company` (`company_id`),
+  CONSTRAINT `fk_email_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company_email`
+--
+
+LOCK TABLES `company_email` WRITE;
+/*!40000 ALTER TABLE `company_email` DISABLE KEYS */;
+INSERT INTO `company_email` VALUES (11,'emc.com',3),(9,'ibm.com',4),(10,'ibm.net',4),(2,'mascorp.aero',2),(1,'panasonic.aero',2);
+/*!40000 ALTER TABLE `company_email` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `company_location`
+--
+
+DROP TABLE IF EXISTS `company_location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company_location` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) unsigned DEFAULT NULL,
+  `street` varchar(64) DEFAULT NULL,
+  `city` varchar(32) NOT NULL DEFAULT '',
+  `state` varchar(2) DEFAULT NULL,
+  `zip` mediumint(11) unsigned NOT NULL,
+  `country` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_location_company` (`company_id`),
+  CONSTRAINT `fk_location_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company_location`
+--
+
+LOCK TABLES `company_location` WRITE;
+/*!40000 ALTER TABLE `company_location` DISABLE KEYS */;
+INSERT INTO `company_location` VALUES (1,1,'0000 Default Street','Default','ZZ',100000,'USA'),(2,2,'26200 Enterprise Way','Lake Forest','CA',92630,'USA'),(3,2,'22333 29th Drive Southeast','Bothell','WA',98021,'USA'),(4,3,'2201 Dupont Drive','Irvine','CA',92612,'USA'),(5,5,'1 New Orchard Road','Armonk','NY',10504,'USA');
+/*!40000 ALTER TABLE `company_location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cookie`
+--
+
+DROP TABLE IF EXISTS `cookie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cookie` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(4) NOT NULL DEFAULT '',
+  `value` varchar(128) NOT NULL DEFAULT '',
+  `user_id` int(11) NOT NULL,
+  `expire_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_set` (`key`,`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cookie`
+--
+
+LOCK TABLES `cookie` WRITE;
+/*!40000 ALTER TABLE `cookie` DISABLE KEYS */;
+INSERT INTO `cookie` VALUES (1,'clID','bfc7890974e3394896f739',4,1360566965134),(4,'clID','4876178c7c7421cba4b653',6,1360998887278);
+/*!40000 ALTER TABLE `cookie` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `delivery`
+--
+
+DROP TABLE IF EXISTS `delivery`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `delivery` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` text NOT NULL,
+  `description` text,
+  `user_id` int(11) unsigned DEFAULT NULL,
+  `zip` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'visible in same zip?',
+  `city` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'visible in same city?',
+  `phone` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'show personal phone #?',
+  PRIMARY KEY (`id`),
+  KEY `fk_announcement_user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `delivery`
+--
+
+LOCK TABLES `delivery` WRITE;
+/*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item`
+--
+
+DROP TABLE IF EXISTS `item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `item` text NOT NULL,
+  `description` text,
+  `category_id` int(11) unsigned DEFAULT NULL,
+  `price` text,
+  `image_count` tinyint(11) NOT NULL DEFAULT '1',
+  `image_paths` mediumtext,
+  `user_id` int(11) unsigned DEFAULT NULL,
+  `company_location_id` int(11) unsigned DEFAULT NULL,
+  `zip` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'visible in same zip?',
+  `city` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'visible in same city?',
+  `show_phone` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'show personal phone #?',
+  `active_until` bigint(20) NOT NULL DEFAULT '0' COMMENT '0 means inactive, negative means verification required',
+  `flag` smallint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `fk_item_category` (`category_id`),
+  KEY `fk_item_user` (`user_id`),
+  KEY `fk_item_company_location` (`company_location_id`),
+  CONSTRAINT `fk_item_category` FOREIGN KEY (`category_id`) REFERENCES `item_category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_item_company_location` FOREIGN KEY (`company_location_id`) REFERENCES `company_location` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_item_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item`
+--
+
+LOCK TABLES `item` WRITE;
+/*!40000 ALTER TABLE `item` DISABLE KEYS */;
+INSERT INTO `item` VALUES (10,'porsche','911 turbo',1,'$90000',1,'_4bc58912d1e396fa1be8b2076a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363078095641,0),(11,'nikon old lens','prime 35mm',1,'$359',2,'_a934eef996b2358cf16a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1362686512134,0),(12,'test','test desc',NULL,'359.79',0,'',7,2,0,0,0,1363300874333,0),(13,'test','test new',NULL,'37.25',0,'',7,2,0,0,0,1363077897949,0),(24,'test1','test1',NULL,'1.99',1,'_b1003dabf9f0527e6a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363293881173,0),(25,'test2','test2',NULL,'1.80',1,'_c73be1636a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363293883972,0),(26,'test3','test3',NULL,'$3.59',1,'_2ec3873d4d8db6a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363299444735,0),(27,'test4','test4',NULL,'3.75',1,'_7a39a8f809ca2bd1a263e6a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363300874333,0),(28,'test5','test5',NULL,'3.79',1,'_4c0876c080707a76a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363300461927,0),(29,'item1','item1',NULL,'3.33',1,'_cf554706a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363300874333,0),(30,'item3','item3',NULL,'3.33',1,'_83e5e368fb3cc7d04d6a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363300874333,0),(32,'item4','item4',NULL,'3.22',1,'_44a3cc15bf8d91c177d74efd6a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363301306468,0),(33,'item5','item5',NULL,'3.21',1,'_47d1766a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363301306468,0),(34,'item5','item5',NULL,'3.22',1,'_65c2db56a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363301550807,0),(35,'item6','item6',NULL,'3.21',1,'_e6eb82505e21b48150f65566a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363301550807,0),(36,'item8','item8',NULL,'3.99',1,'_4f0f87b4950ac42b746a616c6565373840676d61696c2e636f6d',7,2,0,0,0,1363304210223,0),(48,'t3','t3',NULL,'1.79',1,NULL,7,2,0,0,0,1363544089233,0);
+/*!40000 ALTER TABLE `item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item_category`
+--
+
+DROP TABLE IF EXISTS `item_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item_category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_category`
+--
+
+LOCK TABLES `item_category` WRITE;
+/*!40000 ALTER TABLE `item_category` DISABLE KEYS */;
+INSERT INTO `item_category` VALUES (1,'Everything else'),(2,'Electronics');
+/*!40000 ALTER TABLE `item_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_reset`
+--
+
+DROP TABLE IF EXISTS `password_reset`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_reset` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(64) NOT NULL DEFAULT '',
+  `key` varchar(128) NOT NULL DEFAULT '',
+  `expire_time` bigint(20) NOT NULL COMMENT 'use utc_timestamp()',
+  PRIMARY KEY (`id`),
+  KEY `k_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_reset`
+--
+
+LOCK TABLES `password_reset` WRITE;
+/*!40000 ALTER TABLE `password_reset` DISABLE KEYS */;
+INSERT INTO `password_reset` VALUES (1,'jalee78@gmail.com','5f3940713b1cd54495f0cc17ea5c638f7681e45689b307',1361317379297);
+/*!40000 ALTER TABLE `password_reset` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `registration`
+--
+
+DROP TABLE IF EXISTS `registration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `registration` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(64) NOT NULL DEFAULT '',
+  `key` varchar(128) NOT NULL DEFAULT '',
+  `expire_time` bigint(20) NOT NULL COMMENT 'use utc_timestamp()',
+  `company_id` int(11) unsigned DEFAULT NULL,
+  `company_location_id` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_reg_company` (`company_id`),
+  KEY `fk_reg_company_location` (`company_location_id`),
+  KEY `k_email` (`email`),
+  CONSTRAINT `fk_reg_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_reg_company_location` FOREIGN KEY (`company_location_id`) REFERENCES `company_location` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `registration`
+--
+
+LOCK TABLES `registration` WRITE;
+/*!40000 ALTER TABLE `registration` DISABLE KEYS */;
+INSERT INTO `registration` VALUES (10,'jalee78@gmail.com','005695ac15ce81978311332ed629b92a15e3c17c42e404',1361645690655,1,1);
+/*!40000 ALTER TABLE `registration` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `school`
+--
+
+DROP TABLE IF EXISTS `school`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `school` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(64) NOT NULL DEFAULT '',
+  `street` varchar(64) DEFAULT NULL,
+  `city` varchar(32) NOT NULL DEFAULT '',
+  `state` varchar(2) DEFAULT NULL,
+  `zip` mediumint(11) unsigned NOT NULL,
+  `country` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `school`
+--
+
+LOCK TABLES `school` WRITE;
+/*!40000 ALTER TABLE `school` DISABLE KEYS */;
+/*!40000 ALTER TABLE `school` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(64) NOT NULL DEFAULT '',
+  `pwd` varchar(40) NOT NULL DEFAULT '',
+  `name` varchar(64) DEFAULT NULL,
+  `school_id` int(11) unsigned NOT NULL,
+  `phone` varchar(11) DEFAULT NULL,
+  `active_cnt` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student`
+--
+
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(64) NOT NULL DEFAULT '',
+  `pwd` varchar(64) NOT NULL DEFAULT '',
+  `name` varchar(64) DEFAULT NULL,
+  `company_location_id` int(11) unsigned DEFAULT NULL,
+  `dept` varchar(64) DEFAULT NULL,
+  `position` varchar(64) DEFAULT NULL,
+  `phone` varchar(23) DEFAULT NULL,
+  `item_cnt` int(11) NOT NULL DEFAULT '0',
+  `alert` smallint(6) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_user_company_location` (`company_location_id`),
+  CONSTRAINT `fk_user_company_location` FOREIGN KEY (`company_location_id`) REFERENCES `company_location` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'james.lee3@panasonic.aero','','James W. Lee',2,'SWE','MTS III',NULL,0,0,1),(4,'test@company.com','$2a$08$FLSKE0vYzpoBa25il1ULh.fgZx8gIFWlJmiB6hgQL/uxoJMkToOku','Test W. Lee',2,'marketing','agent','',1,1,1),(5,'test1@company.com','$2a$08$Zvo2IzpOL85sVNwmk0RLDO/E.mW8ITgqf0V/pGlm05sSPVswiMaeK','Test Kim',3,'Marketing','Agent','',1,0,1),(6,'james@classifoid.com','$2a$08$FLSKE0vYzpoBa25il1ULh.fgZx8gIFWlJmiB6hgQL/uxoJMkToOku','James Lee',2,'sales','vp',NULL,0,0,1),(7,'jalee78@gmail.com','$2a$08$FLSKE0vYzpoBa25il1ULh.fgZx8gIFWlJmiB6hgQL/uxoJMkToOku','Test Foid',2,'engineering','software engineer',NULL,0,0,1);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2013-02-25 23:15:24

@@ -1,0 +1,54 @@
+{
+    "app":
+    {
+        "port"         : 3700,
+        "sport"        : 3701,
+        "cookieParser" : "^(%)yek(%)$",
+        "adminkey"     : "***REMOVED***",
+        "blockEmail"   : [ "@hotmail.com",
+                           "@yahoo.com"
+                         ],
+        "admin"        : [ "james@classifoid.com"
+                         ],
+        "mail"         : { "service": "Gmail",
+                           "account": "classifoidtest@gmail.com",
+                           "pwd"    : "***REMOVED***"
+                         },
+        "itemVerifyFreq"     : 1,
+        "itemExpireDays"     : 20,
+        "registerExpireDays" : 2,
+        "resetPwdHours"      : 3
+
+    },
+
+    "db":
+    {
+        "host"     : "localhost",
+        "database" : "***REMOVED***",
+        "user"     : "root",
+        "password" : "***REMOVED***",
+        "waitingForConnections": true,
+        "connectionLimit": 35
+    },
+
+    "geoip":
+    {
+        "license" : "***REMOVED***"
+    },
+
+    "blit":
+    {
+        "key" : "***REMOVED***"
+    },
+
+    "s3":
+    {
+        "key"       : "***REMOVED***",
+        "secret"    : "***REMOVED***",
+        "bucket"    : "classifoid",
+        "amazonURL" : "http://s3.amazonaws.com/",
+        "resize"    : { "width"  : 450,
+                        "height" : 325
+                      }
+    }
+}

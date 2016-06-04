@@ -1,0 +1,29 @@
+{ 
+    "reg": {
+             "subject": "classifoid registration",
+             "from":    "classifoid team registration <csejl@yahoo.com>",
+             "to"  :    "",
+             "text":    "here's your link to register https://127.0.0.1:3701/v/r/"
+    },
+
+    "item": {
+             "subject": "classifoid item post verification",
+             "from":    "classifoid team <csejl@yahoo.com>",
+             "to"  :    "",
+             "text":    "simply click on the link to post your item https://127.0.0.1:3701/vr/i/"
+    },
+
+    "mreg": {
+             "subject": "classifoid manual registration required",
+             "from":    "classifoid team registration <csejl@yahoo.com>",
+             "to"  :    "jalee78@gmail.com",
+             "text":    "email address: "
+    },
+
+    "pwd": {
+             "subject": "classifoid password reset",
+             "from":    "classifoid team password <csejl@yahoo.com>",
+             "to"  :    "",
+             "text":    "here's your link to reset your password https://127.0.0.1:3701/r/p/"
+    }
+}

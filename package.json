@@ -1,0 +1,25 @@
+{
+  "name": "classifoid",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "bcrypt": "*",
+    "crypto": "*",
+    "express": "3.0.4",
+    "jade": "*",
+    "knox": "*",
+    "mysql": "*",
+    "nib": "*",
+    "nodemailer": "*",
+    "path": "*",
+    "stylus": "*",
+    "validator": "*",
+    "blitline": "*",
+    "geoipcity": "*",
+    "xml2js": "*",
+    "xml": "*"
+  }
+}
